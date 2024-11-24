@@ -1,0 +1,76 @@
+---
+import Preload from '../components/Preload.astro';
+import SEOMeta from '../components/SEOMeta.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  canonicalUrl?: string;
+}
+
+const { 
+  title, 
+  description = "Discover and download the best Mac apps, carefully curated for your needs.",
+  image,
+  type,
+  canonicalUrl
+} = Astro.props;
+
+// Define critical resources
+const criticalResources = [
+  { path: '/styles/critical.css', type: 'style' },
+  { path: '/fonts/inter-var.woff2', type: 'font' }
+] as const;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    
+    <!-- SEO Meta Tags -->
+    <SEOMeta 
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      canonicalUrl={canonicalUrl}
+    />
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" href="/trymacapps.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/trymacapps.svg" />
+    <link rel="mask-icon" href="/trymacapps.svg" color="#007AFF" />
+    
+    <!-- Preload essential resources -->
+    <Preload />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Cache control -->
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
+    
+    <!-- Security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+    
+    <!-- Rest of your head content... -->
+  </head>
+  <body>
+    <slot />
+    
+    <!-- Counter.dev Analytics -->
+    <script 
+      is:inline
+      src="https://cdn.counter.dev/script.js" 
+      data-id="4639239d-b0a6-454b-aeb6-fe6d9010c192" 
+      data-utcoffset="6"
+    ></script>
+  </body>
+</html>
