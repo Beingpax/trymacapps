@@ -1,6 +1,19 @@
+# Build output
+dist/
+
+# Dependencies
 node_modules/
-   .DS_Store
-   dist/
-   .env
-   .env.local
-   .astro/
+
+# Environment variables
+.env
+.env.local
+
+# System files
+.DS_Store
+
+# Astro
+.astro/
+
+# Secrets
+.env*
+!.env.example
